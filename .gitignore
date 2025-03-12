@@ -1,5 +1,6 @@
 .DS_Store
 assets/
 *.mov
+.ipynb_checkpoints/
 
  
