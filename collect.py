@@ -43,11 +43,14 @@ while cap.isOpened():
     ret, frame = cap.read()
     if not ret: break
     
+    frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
+
     cv2.imshow("f", frame)
     key = cv2.waitKey(0)
 
     if key == ord('s'):
         save_frame(frame)
+        print(f"Saved frame {frame_idx}.")
     elif key == ord('l'):
         frame_idx += 3  
     elif key == ord('h'):
