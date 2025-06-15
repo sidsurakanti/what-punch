@@ -12,34 +12,49 @@ from numpy import typing as npt
 # classify punches
 # get pose landmarks
 
-cap = cv2.VideoCapture(0)
-print("starting capture...")
+cap = cv2.VideoCapture("test.mov")
+# print("starting capture...")
 
-frame_count = 0
-c = cap.get(cv2.CAP_PROP_FPS)
+# frame_count = 0
+FPS = cap.get(cv2.CAP_PROP_FPS)
+FRAMES = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+frame_idx = 0
+
+print(FPS, FRAMES)
 
 def save_frame(frame: npt.NDArray[typing.Any]):
     cur_time = time.time()
     os.makedirs("assets/test", exist_ok=True)
     path = f"./assets/test/{cur_time}.png"
+
     img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     pil_img = Image.fromarray(img)
     pil_img.save(path)
 
+    return
 
-while True:
+
+while cap.isOpened():
+    if frame_idx > FRAMES: 
+        print("Reached end of video")
+        break
+
+    cap.set(cv2.CAP_PROP_POS_FRAMES, frame_idx)
     ret, frame = cap.read()
     if not ret: break
     
-    cv2.imshow("frame", frame)
+    cv2.imshow("f", frame)
+    key = cv2.waitKey(0)
 
-    if frame_count % c == 0:
+    if key == ord('s'):
         save_frame(frame)
-
-    if cv2.waitKey(1) == ord('q'):
+    elif key == ord('l'):
+        frame_idx += 3  
+    elif key == ord('h'):
+        frame_idx = max(0, frame_idx-1)
+    elif key == ord('q'):
         break
 
-    frame_count += 1
 
 cap.release()
 cv2.destroyAllWindows()
