@@ -1,9 +1,11 @@
 # Overview
-What punch is this? It's a (jab, uppercut, straight, hook (?), or idle). Admittedly, my boxing skills aren't great, so data is probably garbage.
+
+What punch is this? It's a (jab, uppercut, straight, hook (?), or idle). Admittedly, my boxing skills aren't great, so the data is probably garbage.
 
 https://github.com/user-attachments/assets/76db0d6d-bbed-419f-a0a9-6baf4a98a43a
 
 ## Sample usage
+
 ```bash
 Train data size: 110
 Test data size: 59
@@ -28,15 +30,16 @@ Time spent training: 121.34s
 
 ## Features
 
-- Custom data 
+- Custom dataset
 - Predicts punches (?)
+- Pretty decent accuracy
 - Can't predit hooks
 
 ## What I Learned
 
-- Concept 1
-- Concept 2
-- Concept 3
+- Curating & analyzing data
+- Evaluating models
+- Realtime inference pipeline
 
 ## Stack
 
@@ -44,9 +47,7 @@ Time spent training: 121.34s
 ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)  
 ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)  
 ![Matplotlib](https://img.shields.io/badge/matplotlib-%23ffffff.svg?style=for-the-badge&logo=matplotlib&logoColor=black)
-![OpenCV](https://img.shields.io/badge/OpenCV-enabled-blue?logo=opencv)
-![Pandas](https://img.shields.io/badge/Pandas-enabled-yellow?logo=pandas&logoColor=black)
-![Pillow](https://img.shields.io/badge/Pillow-enabled-lightgrey?logo=python)
+![OpenCV](https://img.shields.io/badge/opencv-%23white.svg?style=for-the-badge&logo=opencv&logoColor=white)
 
 ## Getting Started
 
@@ -89,6 +90,8 @@ or
 python main.py
 ```
 
+> dm me for the dataset if u wanna see or play w it
+
 ## Contributing
 
 See [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for how to help.
@@ -97,7 +100,7 @@ See [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for how to help.
 
 - [x] Basic structure
 - [ ] Redo data and clean it up
-- [ ] Make the model differentiate hooks & uppercuts
+- [ ] Make the model differentiate hooks & uppercuts better
 - [ ] End to end
 
 ## Support
