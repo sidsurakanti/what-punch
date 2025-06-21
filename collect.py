@@ -12,7 +12,7 @@ from numpy import typing as npt
 # classify punches
 # get pose landmarks
 
-cap = cv2.VideoCapture("8.mov")
+cap = cv2.VideoCapture("7.mov")
 # print("starting capture...")
 
 # frame_count = 0
