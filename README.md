@@ -1,6 +1,8 @@
 # Overview
 What punch is this? It's a (jab, uppercut, straight, hook (?), or idle). Admittedly, my boxing skills aren't great, so data is probably garbage.
 
+https://github.com/user-attachments/assets/76db0d6d-bbed-419f-a0a9-6baf4a98a43a
+
 ## Sample usage
 ```bash
 Train data size: 110
