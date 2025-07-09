@@ -22,6 +22,7 @@ frame_idx = 0
 
 print(FPS, FRAMES)
 
+
 def save_frame(frame: npt.NDArray[typing.Any]):
     cur_time = time.time()
     os.makedirs("assets/test", exist_ok=True)
@@ -35,30 +36,30 @@ def save_frame(frame: npt.NDArray[typing.Any]):
 
 
 while cap.isOpened():
-    if frame_idx > FRAMES: 
+    if frame_idx > FRAMES:
         print("Reached end of video")
         break
 
     cap.set(cv2.CAP_PROP_POS_FRAMES, frame_idx)
     ret, frame = cap.read()
-    if not ret: break
-    
+    if not ret:
+        break
+
     frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
 
     cv2.imshow("f", frame)
     key = cv2.waitKey(0)
 
-    if key == ord('s'):
+    if key == ord("s"):
         save_frame(frame)
         print(f"Saved frame {frame_idx}.")
-    elif key == ord('l'):
-        frame_idx += 3  
-    elif key == ord('h'):
-        frame_idx = max(0, frame_idx-1)
-    elif key == ord('q'):
+    elif key == ord("l"):
+        frame_idx += 3
+    elif key == ord("h"):
+        frame_idx = max(0, frame_idx - 1)
+    elif key == ord("q"):
         break
 
 
 cap.release()
 cv2.destroyAllWindows()
-
