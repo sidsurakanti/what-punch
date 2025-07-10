@@ -2,13 +2,17 @@
 
 import { useRef, useEffect, useState } from "react";
 
+type PredictionResult = {
+  recieved: string;
+  confidence: number;
+  prediction: string;
+};
+
 export default function Home() {
   // BIG IDEA: get users webcam stream -> get curr frame & send to backend -> get and process prediction
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [prediction, setPrediction] = useState<(string | number)[] | null>(
-    null,
-  );
+  const [prediction, setPrediction] = useState<PredictionResult | null>(null);
 
   // connect to ws
   const socketRef = useRef<WebSocket>(null);
@@ -21,16 +25,14 @@ export default function Home() {
     canvas.width = video.videoWidth;
 
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-    ctx.save();
-    ctx.scale(-1, 1);
     ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-    ctx.restore();
   }
 
   // send frame data from canvas (raw binary) to backend
   function sendFrameData(canvas: HTMLCanvasElement): void {
     // console.log("sending frame...");
     const socket = socketRef.current;
+    // console.log(canvas.toDataURL("image/jpeg"));
     canvas.toBlob((frameData: Blob | null) => {
       // ensure websocket connection, then send message
       if (!frameData) return;
@@ -47,14 +49,8 @@ export default function Home() {
 
   // handle socket response
   function handlePredictionResult({ data }: MessageEvent) {
-    const {
-      recieved,
-      confidence,
-      prediction,
-    }: { recieved: string; confidence: number; prediction: string } =
-      JSON.parse(data);
-    setPrediction([prediction, confidence]);
-    console.log(prediction, confidence);
+    const prediction: PredictionResult = JSON.parse(data);
+    setPrediction(prediction);
   }
 
   // socket listeners
@@ -104,8 +100,11 @@ export default function Home() {
   return (
     <main>
       <video ref={videoRef} className="-scale-x-100" autoPlay />
-      <span>{prediction}</span>
-      <canvas ref={canvasRef} />
+      <span>
+        <p className="text-3xl font-bold">{prediction?.prediction}</p>
+        <p>{prediction?.confidence}</p>
+      </span>
+      <canvas ref={canvasRef} className="hidden" />
     </main>
   );
 }

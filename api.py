@@ -1,6 +1,6 @@
 from fastapi import FastAPI, WebSocket
 from typing import Tuple
-from PIL import Image
+from PIL import Image, ImageOps
 import io
 import torch
 from torchvision.transforms.v2 import (
@@ -63,8 +63,9 @@ async def predict(websocket: WebSocket):
         # raw bytes for frame from client
         data = await websocket.receive_bytes()
         img: Image.Image = Image.open(io.BytesIO(data)).convert("RGB")
+        img = ImageOps.mirror(img)
 
         conf, pred = inference(img)
         await websocket.send_json(
-            {"recieved": True, "prediction": pred, "confidence": conf}
+            {"recieved": True, "prediction": pred, "confidence": round(conf * 100)}
         )
