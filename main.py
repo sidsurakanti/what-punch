@@ -87,5 +87,5 @@ class Model(nn.Module):
 EPOCHS = 20
 model = Model().to(DEVICE)
 # acc, loss = fit(model, EPOCHS, DEVICE, trainDL, testDL)
-model.load_state_dict(torch.load("idk2.pth", map_location="cpu"))
+model.load_state_dict(torch.load("etc/weights/idk2.pth", map_location="cpu"))
 inference(model, DEVICE)

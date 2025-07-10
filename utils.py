@@ -21,7 +21,7 @@ def inference(model, device):
     model.eval()
     # get capture
     classes = ["idle", "jab", "straight", "hook", "uppercut"]
-    cap = cv2.VideoCapture("data/4.mp4")
+    cap = cv2.VideoCapture("data/4.mov")
     print(cap.isOpened())
     # resize and apply main transforms
     transforms = Compose(
